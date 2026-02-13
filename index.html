@@ -1,0 +1,84 @@
+
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Will you be my Valentine? 💖</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <main class="page">
+    <!-- Floating hearts background -->
+    <div class="hearts" id="hearts" aria-hidden="true"></div>
+
+    <!-- Confetti behind cards -->
+    <div class="confetti" id="confetti" aria-hidden="true"></div>
+
+    <!-- Main card -->
+    <section class="card" id="card">
+      <h1 class="title">Will you be my Valentine? 💘</h1>
+      <p class="subtitle" id="subtitle">Be honest… but choose wisely 😅</p>
+
+      <div class="play-area" id="playArea" aria-label="Valentine choice area">
+        <button class="btn btn-yes" id="yesBtn" type="button">Yes 💖</button>
+        <button class="btn btn-no" id="noBtn" type="button" aria-label="No (good luck clicking this)">No 🙅‍♂️</button>
+      </div>
+
+      <div class="hint">
+        <span class="dot"></span>
+        Tip: Try to click <b>No</b> 😈
+      </div>
+
+      <div class="controls">
+        <button class="btn btn-ghost" id="resetBtn" type="button">Reset</button>
+        <label class="toggle">
+          <input type="checkbox" id="soundToggle" />
+          <span>Sound</span>
+        </label>
+      </div>
+    </section>
+
+    <!-- Celebration card -->
+    <section class="card celebrate hidden" id="celebrate">
+      <h1 class="title">YAYYYYY!!! 💃🕺💖</h1>
+      <p class="subtitle">You just made my whole day 🥹</p>
+
+      <!-- GIPHY Embed (click-safe) -->
+      <div class="gif-wrapper">
+        <div style="width:100%;height:0;padding-bottom:90%;position:relative;">
+          <iframe
+            src="https://giphy.com/embed/9sEmlm8kV4PSM"
+            width="100%"
+            height="100%"
+            style="position:absolute;left:0;top:0;"
+            frameBorder="0"
+            class="giphy-embed"
+            allowFullScreen>
+          </iframe>
+        </div>
+        <p class="gif-credit">
+          <a href="https://giphy.com/gifs/thread-realgm-non-9sEmlm8kV4PSM" target="_blank" rel="noreferrer">
+            via GIPHY
+          </a>
+        </p>
+      </div>
+
+      <div class="actions">
+        <button class="btn btn-yes" id="restartBtn" type="button">Play again</button>
+        <button class="btn btn-ghost" id="copyBtn" type="button">Copy link</button>
+      </div>
+    </section>
+
+    <!-- Optional sounds (add local mp3s) -->
+    <audio id="popAudio" preload="auto">
+      <source src="assets/pop.mp3" type="audio/mpeg" />
+    </audio>
+    <audio id="yayAudio" preload="auto">
+      <source src="assets/yay.mp3" type="audio/mpeg" />
+    </audio>
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>

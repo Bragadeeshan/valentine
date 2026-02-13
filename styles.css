@@ -1,0 +1,266 @@
+/* styles.css ✅ FULL COPY/PASTE */
+
+:root{
+  --bg1:#ffdde1;
+  --bg2:#ee9ca7;
+  --card:#ffffffcc;
+  --text:#1f1f1f;
+  --muted:#444;
+  --yes:#22c55e;
+  --yesHover:#16a34a;
+  --no:#ef4444;
+  --ghost:#111827;
+  --shadow: 0 20px 60px rgba(0,0,0,.15);
+  --radius: 22px;
+}
+
+*{ box-sizing:border-box; }
+html,body{ height:100%; }
+
+body{
+  margin:0;
+  font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji","Segoe UI Emoji";
+  color:var(--text);
+  background:
+    radial-gradient(1200px 800px at 20% 20%, var(--bg1), transparent 60%),
+    radial-gradient(900px 700px at 80% 10%, #ffd1dc, transparent 55%),
+    linear-gradient(135deg, var(--bg1), var(--bg2));
+  overflow:hidden;
+}
+
+.page{
+  min-height:100%;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  padding:24px;
+  position:relative;
+}
+
+/* Cards above confetti */
+.card{
+  width:min(560px, 92vw);
+  background:var(--card);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255,255,255,.55);
+  border-radius: var(--radius);
+  box-shadow: 0 30px 90px rgba(0,0,0,.18);
+  padding: 26px 22px 20px;
+  text-align:center;
+  position:relative;
+  z-index: 5;
+}
+
+.title{
+  margin: 4px 0 10px;
+  font-size: clamp(26px, 3.6vw, 40px);
+  letter-spacing:-0.02em;
+  text-shadow: 0 6px 22px rgba(236,72,153,.22);
+}
+
+.subtitle{
+  margin: 0 0 18px;
+  color: var(--muted);
+  font-size: 16px;
+}
+
+.play-area{
+  position:relative;
+  width:min(520px, 86vw);
+  height: 210px;
+  margin: 14px auto 14px;
+  border-radius: 18px;
+  border: 1px dashed rgba(0,0,0,.15);
+  background: linear-gradient(180deg, rgba(255,255,255,.75), rgba(255,255,255,.45));
+  overflow:hidden;
+}
+
+.btn{
+  border:0;
+  border-radius: 999px;
+  padding: 14px 20px;
+  font-weight: 700;
+  font-size: 16px;
+  cursor:pointer;
+  transition: transform .12s ease, box-shadow .12s ease, background .12s ease;
+  user-select:none;
+}
+
+.btn:active{ transform: translateY(1px) scale(.99); }
+
+/* TikTok aesthetic */
+.btn-yes, .btn-no{
+  box-shadow: 0 14px 30px rgba(0,0,0,.16), 0 0 0 6px rgba(255,255,255,.25);
+}
+
+.btn-yes{
+  background: linear-gradient(135deg, #22c55e, #86efac);
+  color:white;
+  position:absolute;
+  left: 22%;
+  top: 58%;
+  transform: translate(-50%, -50%);
+}
+
+.btn-yes:hover{
+  background: linear-gradient(135deg, #16a34a, #86efac);
+  transform: translate(-50%, -50%) scale(1.02);
+}
+
+.btn-no{
+  background: linear-gradient(135deg, #ef4444, #fb7185);
+  color:white;
+  position:absolute;
+  left: 72%;
+  top: 58%;
+  transform: translate(-50%, -50%);
+}
+
+.btn-no:hover{
+  transform: translate(-50%, -50%) scale(1.02);
+}
+
+.btn-ghost{
+  background: rgba(17,24,39,.08);
+  color: var(--ghost);
+  box-shadow: none;
+  font-weight: 650;
+}
+
+.btn-ghost:hover{ background: rgba(17,24,39,.12); }
+
+.hint{
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:10px;
+  color: rgba(0,0,0,.62);
+  font-size: 14px;
+  margin-top: 4px;
+}
+
+.dot{
+  width:10px; height:10px;
+  border-radius:99px;
+  background: rgba(239,68,68,.9);
+  box-shadow: 0 0 0 6px rgba(239,68,68,.15);
+}
+
+.controls{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  margin-top: 16px;
+  gap: 10px;
+}
+
+.toggle{
+  display:flex;
+  gap:10px;
+  align-items:center;
+  font-size: 14px;
+  color: rgba(0,0,0,.7);
+  user-select:none;
+}
+
+.toggle input{ width: 18px; height: 18px; }
+
+.hidden{ display:none; }
+
+/* Celebration */
+.celebrate{ padding-bottom: 40px; }
+
+.gif-wrapper{
+  margin: 18px auto 28px;
+  max-width: min(460px, 86vw);
+}
+
+.gif-wrapper iframe{ border-radius: 18px; }
+
+.gif-credit{
+  font-size: 13px;
+  margin-top: 6px;
+  opacity: 0.7;
+}
+
+.actions{
+  margin-top: 40px;        /* buttons lower */
+  position: relative;
+  z-index: 20;             /* above iframe */
+  display:flex;
+  gap: 10px;
+  justify-content:center;
+  flex-wrap:wrap;
+}
+
+/* iframe doesn't block clicks */
+.giphy-embed{ pointer-events:none; }
+
+/* Fade in */
+.fade-in{ animation: fadeInUp .5s ease both; }
+@keyframes fadeInUp{
+  from { opacity: 0; transform: translateY(14px) scale(.98); }
+  to   { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+/* Confetti BEHIND */
+.confetti{
+  position:fixed;
+  inset:0;
+  pointer-events:none;
+  overflow:hidden;
+  z-index: 1; /* behind card */
+}
+
+.confetti-piece{
+  position:absolute;
+  top: -10px;
+  width: 10px;
+  height: 14px;
+  border-radius: 3px;
+  opacity: .95;
+  transform: rotate(0deg);
+  animation: fall linear forwards;
+}
+
+@keyframes fall{
+  to{ transform: translateY(110vh) rotate(720deg); }
+}
+
+/* Hearts background */
+.hearts{
+  position:fixed;
+  inset:0;
+  pointer-events:none;
+  z-index: 0;
+  overflow:hidden;
+}
+
+.heart{
+  position:absolute;
+  bottom:-30px;
+  font-size: 18px;
+  opacity: .9;
+  animation: floatUp linear forwards;
+  filter: drop-shadow(0 10px 18px rgba(0,0,0,.12));
+}
+
+@keyframes floatUp{
+  to{
+    transform: translateY(-115vh) translateX(var(--drift)) rotate(360deg);
+    opacity: 0;
+  }
+}
+
+/* Mobile tweaks */
+@media (max-width: 420px){
+  .play-area{ height: 230px; }
+  .actions{ margin-top: 28px; }
+}
+
+/* Reduced motion respect */
+@media (prefers-reduced-motion: reduce){
+  .confetti-piece{ animation: none; }
+  .heart{ animation: none; }
+  .btn{ transition:none; }
+}
