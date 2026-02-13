@@ -28,11 +28,38 @@ const lines = [
   "Wait… why are you hovering ‘No’? 🤨",
   "AYO STOP 😭",
   "That button is shy 🙈",
-  "Okay okay… just press Yes 😤",
-  "This is getting personal 😳",
+  "Are you serious right now? 😐",
+  "This is awkward already 😬",
+  "You missed. Again. 😂",
+  "No doesn’t feel safe 😳",
+  "You really trying that hard huh?",
+  "Okay but like… why though? 😩",
+  "Just press Yes and let’s be happy 🥹",
+  "This is getting personal now 😤",
   "Bro… it’s Valentine’s 😩💖",
-  "One more try and the Yes gets bigger 😈",
+  "You're testing my patience 😭",
+  "That button has trust issues 🏃‍♂️💨",
+  "It said NOPE.",
+  "The No button is in survival mode 😭",
+  "You vs The No Button — who wins?",
+  "Plot twist: It keeps running.",
+  "Why are you like this? 😂",
+  "Are you scared of happiness?",
+  "Yes is right there… glowing… waiting ✨",
+  "This could’ve been over already 😭",
+  "The Yes button is getting stronger 💪",
+  "Last chance before I make Yes huge 😈",
+  "Okay this is the final warning.",
+  "Alright now you're just being mean 😩",
+  "The No button filed for protection.",
+  "It’s fighting for its life 😂",
+  "Just press Yes and we both win 💘",
+  "Fine. Keep trying. I dare you.",
+  "Yes is inevitable.",
+  "Resistance is futile 😌",
+  "Okay okay YOU WIN… just press Yes.",
 ];
+
 
 placeNoAtPercent(72, 58);
 placeYesAtPercent(22, 58);
@@ -151,7 +178,8 @@ function moveNoButton() {
   safeUntil = Date.now() + 220;
 
   escapeCount++;
-  subtitle.textContent = lines[Math.min(escapeCount, lines.length - 1)];
+  subtitle.textContent = lines[escapeCount % lines.length];
+
 
   // Grow YES for viral effect
   const scale = 1 + Math.min(escapeCount * 0.05, 0.6);
