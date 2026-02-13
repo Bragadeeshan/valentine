@@ -1,4 +1,6 @@
-// script.js ✅ FULL COPY/PASTE
+// script.js ✅ FULL COPY/PASTE (GitHub Pages safe + local GIF)
+
+console.log("script loaded ✅");
 
 const playArea = document.getElementById("playArea");
 const yesBtn = document.getElementById("yesBtn");
@@ -20,8 +22,8 @@ const yayAudio = document.getElementById("yayAudio");
 
 let escapeCount = 0;
 let lastMoveAt = 0;
-let lastPointer = { x: 0, y: 0 };
-let safeUntil = 0; // prevents immediate repeat triggers after teleport
+let lastPointer = { x: window.innerWidth / 2, y: window.innerHeight / 2 };
+let safeUntil = 0;
 
 const lines = [
   "Be honest… but choose wisely 😅",
@@ -60,7 +62,6 @@ const lines = [
   "Okay okay YOU WIN… just press Yes.",
 ];
 
-
 placeNoAtPercent(72, 58);
 placeYesAtPercent(22, 58);
 
@@ -76,11 +77,6 @@ function placeYesAtPercent(xPercent, yPercent) {
 function clamp(n, min, max) { return Math.max(min, Math.min(max, n)); }
 function randomInRange(min, max) { return Math.random() * (max - min) + min; }
 
-function getCenter(el) {
-  const r = el.getBoundingClientRect();
-  return { x: r.left + r.width / 2, y: r.top + r.height / 2, w: r.width, h: r.height };
-}
-
 /* ---------- audio ---------- */
 function unlockAudio() {
   if (!soundToggle.checked) return;
@@ -88,7 +84,6 @@ function unlockAudio() {
   popAudio.volume = 0.6;
   yayAudio.volume = 0.85;
 
-  // Attempt to "unlock" with a user gesture
   popAudio.play().then(() => {
     popAudio.pause();
     popAudio.currentTime = 0;
@@ -107,13 +102,12 @@ function playYay() {
   yayAudio.play().catch(() => {});
 }
 
-// Unlock audio on first interaction (browser policy)
 document.addEventListener("pointerdown", unlockAudio, { once: true });
 
-/* ---------- NO button movement (fixed "skips") ---------- */
+/* ---------- NO button movement ---------- */
 function moveNoButton() {
   const now = Date.now();
-  if (now - lastMoveAt < 140) return; // stronger throttle
+  if (now - lastMoveAt < 140) return;
   lastMoveAt = now;
 
   const areaRect = playArea.getBoundingClientRect();
@@ -132,19 +126,16 @@ function moveNoButton() {
     x = randomInRange(minX, maxX);
     y = randomInRange(minY, maxY);
 
-    // Proposed center in viewport coords
     const proposedCenter = {
       x: areaRect.left + x + noRect.width / 2,
       y: areaRect.top + y + noRect.height / 2,
     };
 
-    // Keep away from pointer so it doesn't instantly retrigger
     const pointerDx = lastPointer.x - proposedCenter.x;
     const pointerDy = lastPointer.y - proposedCenter.y;
     const pointerDist = Math.sqrt(pointerDx * pointerDx + pointerDy * pointerDy);
     const minPointerDistance = 140;
 
-    // Avoid overlapping Yes
     const proposed = {
       left: areaRect.left + x,
       right: areaRect.left + x + noRect.width,
@@ -174,14 +165,11 @@ function moveNoButton() {
   noBtn.style.left = `${clamp(leftPct, 0, 100)}%`;
   noBtn.style.top = `${clamp(topPct, 0, 100)}%`;
 
-  // Ignore triggers briefly after teleport
   safeUntil = Date.now() + 220;
 
   escapeCount++;
   subtitle.textContent = lines[escapeCount % lines.length];
 
-
-  // Grow YES for viral effect
   const scale = 1 + Math.min(escapeCount * 0.05, 0.6);
   yesBtn.style.transform = `translate(-50%, -50%) scale(${scale})`;
 
@@ -197,28 +185,28 @@ function handlePointerMove(e) {
 
   if (Date.now() < safeUntil) return;
 
-  const c = getCenter(noBtn);
-  const dx = lastPointer.x - c.x;
-  const dy = lastPointer.y - c.y;
+  const noRect = noBtn.getBoundingClientRect();
+  const cx = noRect.left + noRect.width / 2;
+  const cy = noRect.top + noRect.height / 2;
+
+  const dx = lastPointer.x - cx;
+  const dy = lastPointer.y - cy;
   const dist = Math.sqrt(dx * dx + dy * dy);
 
   const threshold = 95 + Math.min(escapeCount * 5, 60);
   if (dist < threshold) moveNoButton();
 }
 
-// Works for mouse + touch + stylus
 document.addEventListener("pointermove", handlePointerMove);
 
-// Mobile: if they try to tap it, it runs
 noBtn.addEventListener("pointerdown", (e) => {
   e.preventDefault();
   moveNoButton();
 });
 
-// If cursor lands on it, run
 noBtn.addEventListener("mouseenter", () => moveNoButton());
 
-/* ---------- YES click => celebration ---------- */
+/* ---------- YES click ---------- */
 yesBtn.addEventListener("click", () => {
   card.classList.add("hidden");
   celebrate.classList.remove("hidden");
@@ -258,10 +246,8 @@ copyBtn.addEventListener("click", async () => {
   }
 });
 
-/* ---------- Confetti (behind GIF) ---------- */
-function clearConfetti() {
-  confettiLayer.innerHTML = "";
-}
+/* ---------- Confetti ---------- */
+function clearConfetti() { confettiLayer.innerHTML = ""; }
 
 function launchConfetti(count = 100) {
   clearConfetti();
@@ -289,12 +275,11 @@ function launchConfetti(count = 100) {
     piece.style.background = colors[Math.floor(Math.random() * colors.length)];
 
     confettiLayer.appendChild(piece);
-
     setTimeout(() => piece.remove(), (duration + delay) * 1000 + 200);
   }
 }
 
-/* ---------- Floating hearts background ---------- */
+/* ---------- Floating hearts ---------- */
 function spawnHearts() {
   const prefersReduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
   if (prefersReduced) return;
@@ -304,7 +289,7 @@ function spawnHearts() {
   heart.textContent = Math.random() > 0.5 ? "💗" : "💖";
 
   const left = Math.random() * window.innerWidth;
-  const size = randomInRange(14, 28);
+  const size = randomInRange(16, 30);
   const dur = randomInRange(4.5, 8.5);
   const drift = `${randomInRange(-60, 60)}px`;
 
@@ -317,8 +302,7 @@ function spawnHearts() {
   setTimeout(() => heart.remove(), dur * 1000 + 200);
 }
 
-// Start hearts
-setInterval(spawnHearts, 450);
+setInterval(spawnHearts, 420);
 
 /* ---------- Reduced motion fallback ---------- */
 (function reducedMotionFallback() {

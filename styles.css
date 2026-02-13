@@ -1,4 +1,4 @@
-/* styles.css ✅ FULL COPY/PASTE */
+/* styles.css ✅ FULL COPY/PASTE (GitHub Pages safe) */
 
 :root{
   --bg1:#ffdde1;
@@ -6,11 +6,7 @@
   --card:#ffffffcc;
   --text:#1f1f1f;
   --muted:#444;
-  --yes:#22c55e;
-  --yesHover:#16a34a;
-  --no:#ef4444;
   --ghost:#111827;
-  --shadow: 0 20px 60px rgba(0,0,0,.15);
   --radius: 22px;
 }
 
@@ -37,10 +33,10 @@ body{
   position:relative;
 }
 
-/* Cards above confetti */
+/* Cards above effects */
 .card{
   width:min(560px, 92vw);
-  background:var(--card);
+  background:rgba(255,255,255,.8);
   backdrop-filter: blur(10px);
   border: 1px solid rgba(255,255,255,.55);
   border-radius: var(--radius);
@@ -88,7 +84,7 @@ body{
 
 .btn:active{ transform: translateY(1px) scale(.99); }
 
-/* TikTok aesthetic */
+/* TikTok aesthetic gradients */
 .btn-yes, .btn-no{
   box-shadow: 0 14px 30px rgba(0,0,0,.16), 0 0 0 6px rgba(255,255,255,.25);
 }
@@ -171,30 +167,29 @@ body{
 .celebrate{ padding-bottom: 40px; }
 
 .gif-wrapper{
-  margin: 18px auto 28px;
+  margin: 18px auto 18px;
   max-width: min(460px, 86vw);
 }
 
-.gif-wrapper iframe{ border-radius: 18px; }
-
-.gif-credit{
-  font-size: 13px;
-  margin-top: 6px;
-  opacity: 0.7;
+.mobile-gif{
+  width: 100%;
+  height: auto;
+  max-width: 460px;
+  border-radius: 18px;
+  display:block;
+  margin: 0 auto;
+  box-shadow: 0 16px 40px rgba(0,0,0,.18);
 }
 
 .actions{
-  margin-top: 40px;        /* buttons lower */
+  margin-top: 28px;
   position: relative;
-  z-index: 20;             /* above iframe */
+  z-index: 20;
   display:flex;
   gap: 10px;
   justify-content:center;
   flex-wrap:wrap;
 }
-
-/* iframe doesn't block clicks */
-.giphy-embed{ pointer-events:none; }
 
 /* Fade in */
 .fade-in{ animation: fadeInUp .5s ease both; }
@@ -203,13 +198,13 @@ body{
   to   { opacity: 1; transform: translateY(0) scale(1); }
 }
 
-/* Confetti BEHIND */
+/* Confetti behind cards */
 .confetti{
   position:fixed;
   inset:0;
   pointer-events:none;
   overflow:hidden;
-  z-index: 1; /* behind card */
+  z-index: 1; /* behind cards */
 }
 
 .confetti-piece{
@@ -227,22 +222,22 @@ body{
   to{ transform: translateY(110vh) rotate(720deg); }
 }
 
-/* Hearts background */
+/* Hearts background (VISIBLE) */
 .hearts{
   position:fixed;
   inset:0;
   pointer-events:none;
-  z-index: 0;
+  z-index: 2; /* above background, below cards */
   overflow:hidden;
 }
 
 .heart{
   position:absolute;
   bottom:-30px;
-  font-size: 18px;
-  opacity: .9;
+  font-size: 22px;
+  opacity: .95;
   animation: floatUp linear forwards;
-  filter: drop-shadow(0 10px 18px rgba(0,0,0,.12));
+  filter: drop-shadow(0 10px 18px rgba(0,0,0,.18));
 }
 
 @keyframes floatUp{
@@ -255,7 +250,7 @@ body{
 /* Mobile tweaks */
 @media (max-width: 420px){
   .play-area{ height: 230px; }
-  .actions{ margin-top: 28px; }
+  .actions{ margin-top: 22px; }
 }
 
 /* Reduced motion respect */
@@ -263,14 +258,4 @@ body{
   .confetti-piece{ animation: none; }
   .heart{ animation: none; }
   .btn{ transition:none; }
-}
-
-.mobile-gif {
-  width: 100%;
-  max-width: 420px;
-  height: auto;
-  border-radius: 18px;
-  display: block;
-  margin: 0 auto;
-  box-shadow: 0 16px 40px rgba(0,0,0,.18);
 }
